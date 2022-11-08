@@ -1,6 +1,10 @@
-
-title = "lightly settings"
-
-ports = []
-
-[languages]
+[[ports]]
+port = 9090
+is_internal = false
+active = true
+protocol = "http"
+[languages.go]
+language = "go"
+[languages.go.run."form.go"]
+name = "form.go"
+path = "/workspace/GolangWorkDemo/web/02_form_demo/form.go"
