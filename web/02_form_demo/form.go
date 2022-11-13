@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"html/template"
+	"text/template"
 	"log"
 	"net/http"
-	"net/url"
 	"strings"
 )
 
@@ -31,18 +30,27 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		//请求的是登录数据，那么执行登录的逻辑判断
 		r.ParseForm() //默认情况下，Handler里面是不会自动解析form的，必须显式的调用r.ParseForm()后，你才能对这个表单数据进行操作
-		fmt.Println("username:", r.Form["username"])
-		fmt.Println("password:", r.Form["password"])
+		// fmt.Println("username:", r.Form["username"])
+		// fmt.Println("password:", r.Form["password"])
 
-		v := url.Values{}
-		v.Set("name", "Ava")
-		v.Add("friend", "Jess")
-		v.Add("friend", "Sarah")
-		v.Add("friend", "Zoe")
-		// v.Encode() == "name=Ava&friend=Jess&friend=Sarah&friend=Zoe"
-		fmt.Println(v.Get("name"))
-		fmt.Println(v.Get("friend"))
-		fmt.Println(v["friend"])
+		// fmt.Println("username:", template.HTMLEscapeString(r.Form.Get("username"))) // 输出到服务器端
+		// fmt.Println("password:", template.HTMLEscapeString(r.Form.Get("password")))
+		// template.HTMLEscape(w, []byte(r.Form.Get("username"))) // 输出到客户端
+		t, err := template.New("foo").Parse(`{{define "T"}}Hello, {{.}}!{{end}}`)
+		err = t.ExecuteTemplate(w, "T", "<script>alert('you have been pwned')</script>")
+		if err != nil {
+			log.Println(err)
+		}
+
+		// v := url.Values{}
+		// v.Set("name", "Ava")
+		// v.Add("friend", "Jess")
+		// v.Add("friend", "Sarah")
+		// v.Add("friend", "Zoe")
+		// // v.Encode() == "name=Ava&friend=Jess&friend=Sarah&friend=Zoe"
+		// fmt.Println(v.Get("name"))
+		// fmt.Println(v.Get("friend"))
+		// fmt.Println(v["friend"])
 	}
 }
 
