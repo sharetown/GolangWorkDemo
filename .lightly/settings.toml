@@ -5,6 +5,22 @@ active = true
 protocol = "http"
 [languages.go]
 language = "go"
+[languages.go.run."02_number.go"]
+name = "02_number.go"
+path = "/workspace/GolangWorkDemo/web/03_validate_input_of_form/02_number.go"
+
+[languages.go.run."01_required_field.go"]
+name = "01_required_field.go"
+path = "/workspace/GolangWorkDemo/web/03_validate_input_of_form/01_required_field.go"
+
 [languages.go.run."form.go"]
 name = "form.go"
 path = "/workspace/GolangWorkDemo/web/02_form_demo/form.go"
+
+[languages.go.run."upload.go"]
+name = "upload.go"
+path = "/workspace/GolangWorkDemo/web/05_file_upLoad/upload.go"
+
+[languages.go.run."input.go"]
+name = "input.go"
+path = "/workspace/GolangWorkDemo/web/04_disable_multiple_input/input.go"
