@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:c)t9e5wku&i9@tcp(cs-cn-east-73.teamcode.com:4018)/test?charset=utf8")
+	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/test?charset=utf8")
 	checkErr(err)
 	db.Ping()
 	// 插入数据
@@ -20,6 +20,23 @@ func main() {
 	checkErr(err)
 
 	fmt.Println(id)
+
+	// 查询数据
+	rows, err := db.Query("SELECT * FROM userinfo")
+	checkErr(err)
+
+	for rows.Next() {
+		var uid int
+		var username string
+		var department string
+		var created string
+		err = rows.Scan(&uid, &username, &department, &created)
+		checkErr(err)
+		fmt.Println(uid)
+		fmt.Println(username)
+		fmt.Println(department)
+		fmt.Println(created)
+	}
 }
 func checkErr(err error) {
 	if err != nil {
